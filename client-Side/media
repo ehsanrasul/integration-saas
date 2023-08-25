@@ -1,0 +1,8 @@
+
+  @media (max-width: 768px) {
+    width:;
+    height:;
+    top:;
+    left:;
+    font-size:10px;
+  }
