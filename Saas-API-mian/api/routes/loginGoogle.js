@@ -22,7 +22,7 @@ app.use(cors({
 passport.use(new GoogleStrategy({
     clientID: clientID,
     clientSecret: clientSecret,
-    callbackURL: 'http://localhost:5000/auth/google/callback',
+    callbackURL: 'http://localhost:3001/auth/google/callback',
     
 },
 (accessToken, refreshToken, profile, done) => {
