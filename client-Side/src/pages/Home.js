@@ -1,7 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "react-bootstrap";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
 
 const BackgroundIcon = styled.img`
   position: absolute;
@@ -11,6 +13,16 @@ const BackgroundIcon = styled.img`
   height: 100%;
   opacity: 0.4;
 `;
+
+const LogoutButton = styled(Button)`
+position: absolute;
+top: 21px;
+left: 94%;
+font-size: 13px;
+font-weight: 600;
+color : white;
+`;
+
 const HomeChild = styled.div`
   position: absolute;
   top: 265px;
@@ -507,6 +519,34 @@ const HomeRoot = styled.div`
   font-family: var(--font-poppins);
 `;
 const Home = () => {
+
+  const navigate = useNavigate();
+  const handleLogout = (e) => {
+    e.preventDefault();
+    // Make a fetch API call to the logout route on your server
+    fetch("http://localhost:3001/user/logout", {
+      method: "POST", // You can adjust the HTTP method as needed (e.g., GET, POST)
+      headers: {
+        "Content-Type": "application/json", // Specify the content type
+      },
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          // Logout was successful, redirect to a different page
+          navigate("/login"); // You can adjust the redirect URL
+        } else {
+          // Handle logout failure (e.g., show an error message)
+          console.error("Logout failed");
+        }
+      })
+      .catch((error) => {
+        // Handle any network or fetch API errors
+        console.error("Error:", error);
+      });
+};
+
+
+
   return (
     <HomeRoot>
       <BackgroundIcon alt="" src="/background6.svg" />
@@ -516,6 +556,7 @@ const Home = () => {
       <LukeJohn>Luke John</LukeJohn>
       <HomeInner alt="" src="/ellipse-51@2x.png" />
       <EllipseIcon alt="" src="/ellipse-6@2x.png" />
+      <LogoutButton onClick={handleLogout} >Logout</LogoutButton>
       </Link>
       <Icon alt="" src="/1.svg" />
       <Chatbox>

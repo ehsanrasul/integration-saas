@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const BackgroundIcon = styled.img`
@@ -521,6 +522,64 @@ const EditProfileRoot = styled.div`
 `;
 
 const EditProfile = () => {
+
+  const [email, setEmail] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("")
+  const [newPassword, setNewPassword] = useState("");
+  const [confNewPassword, setConfNewPassword] = useState("");
+  
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleCurrentPasswordChange = (e) => {
+    setCurrentPassword(e.target.value);
+  };
+
+
+  const handleNewPasswordChange = (e) => {
+    setNewPassword(e.target.value);
+  };
+
+  const handleConfNewPasswordChange = (e) => {
+    setConfNewPassword(e.target.value);
+  };
+
+  const handleSaveClick = (e) => {
+    e.preventDefault();
+
+        alert("dasdasdas")
+  
+        fetch("http://localhost:3001/user/update-my-password", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email,
+        currentPassword:currentPassword,
+        newPassword: newPassword,
+        confNewPassword : confNewPassword
+      })
+    })
+  .then(response => response.json())
+  .then(data => {
+    if (data) {
+      navigate('/home');
+      // Do something after successful login
+    } else {
+      console.log("Login failed");
+      // Do Nothing if fails
+    }
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
+
+  };
+
+
+
   return (
     <EditProfileRoot>
       <BackgroundIcon alt="" src="/background3.svg" />
@@ -577,10 +636,10 @@ const EditProfile = () => {
       <EditProfileInner alt="" src="/vector-71.svg" />
       <EditProfileChild1 alt="" src="/vector-71.svg" />
       <RectangleDiv placeholder="Enter First Name"/>
-      <EditProfileChild2 placeholder="Enter Email Address"/>
-      <EditProfileChild3 placeholder="Enter Current Password"/>
-      <EditProfileChild4 placeholder="Enter New Password"/>
-      <EditProfileChild5 placeholder="Confirm New Password"/>
+      <EditProfileChild2 placeholder="Enter Email Address" onChange={handleEmailChange} />
+      <EditProfileChild3 placeholder="Enter Current Password" onChange={handleCurrentPasswordChange}/>
+      <EditProfileChild4 placeholder="Enter New Password" onChange={handleNewPasswordChange}/>
+      <EditProfileChild5 placeholder="Confirm New Password" onChange={handleConfNewPasswordChange}/>
       <EditProfileChild6 placeholder="Enter Last Name"/>
       <ChangingYourPassword>
         Changing your password will log you out of every device except this one.
@@ -592,7 +651,7 @@ const EditProfile = () => {
         </Link>
         <Link to="/home">
         <NextItem />
-        <Save>Save</Save>
+        <Save onClick={handleSaveClick}>Save</Save>
         </Link>
       </Next>
       </div>

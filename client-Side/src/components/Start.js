@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { Button, Typography, TextField, Checkbox, FormControlLabel } from "@mui/material";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import  Login  from "../pages/Login.js";
 
 const BackgroundIcon = styled.img`
   position: absolute;
@@ -182,6 +183,19 @@ const Logo1 = styled.div`
   height: 106.49px;
 `;
 const JoinFree = styled(Button)`
+  width: 17%;
+  position: absolute;
+  top: 23px;
+  left: 70%;
+  color:yellow;
+  border-radius: 50;
+  text-transform: uppercase; 
+  display:inline-block;
+  height:54px;
+  font-weight:600px;
+`;
+
+const LoginButton = styled(Button)`
   width: 17%;
   position: absolute;
   top: 23px;
@@ -1251,6 +1265,9 @@ const Start = () => {
         <JoinFree variant="warning" href="/login-option" >
           Join Free
         </JoinFree>
+        <LoginButton variant="warning" href="/Login" >
+          Login
+        </LoginButton>
       </Header>
       <YourAiAssistantContainer>
         <YourAiAssistant>{`Your AI Assistant to `}</YourAiAssistant>
@@ -1377,7 +1394,8 @@ const Start = () => {
           <EmailAddress>Email address</EmailAddress>
         </RectangleParent>
       </Get>
-      <PopUp />
+      {/* <PopUp /> */}
+      {/* <Login/> */}
     </StartRoot>
   );
 };
