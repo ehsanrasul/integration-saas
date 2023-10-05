@@ -39,6 +39,7 @@ passport.deserializeUser((user, done) => {
 
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
+
 router.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/error' }),
   function(req, res) {

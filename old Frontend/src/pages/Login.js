@@ -183,7 +183,7 @@ class SlideNavbar extends React.Component {
               type="email"
               name="email"
               placeholder="Email" // Use "userName" for login
-              id="loginmail"
+              id="loginEmail"
               value={this.state.userName}
               onChange={this.handleEmailChange}
               required=""
